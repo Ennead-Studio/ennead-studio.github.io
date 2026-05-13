@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ennead Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8cc7a;
+      --gold-dim: #7a6130;
+      --night: #07080f;
+      --deep: #0d0f1e;
+      --surface: #13162a;
+      --border: rgba(201,168,76,0.15);
+      --text: #e8e0cc;
+      --muted: #8a8070;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--night);
+      color: var(--text);
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* STARFIELD */
+    canvas#stars {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.6;
+    }
+
+    /* LANG TOGGLE */
+    .lang-toggle {
+      position: fixed;
+      top: 24px; right: 32px;
+      z-index: 100;
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .lang-toggle button {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      padding: 6px 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .lang-toggle button.active {
+      background: var(--gold);
+      color: var(--night);
+    }
+    .lang-toggle button:hover:not(.active) {
+      color: var(--gold);
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      z-index: 99;
+      padding: 24px 48px;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(to bottom, rgba(7,8,15,0.95), transparent);
+    }
+    .nav-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .nav-links {
+      margin-left: auto;
+      margin-right: 100px;
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* SECTIONS */
+    section {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 32px 80px;
+    }
+
+    .ennead-emblem {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 48px;
+      position: relative;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .hero-subtitle {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      letter-spacing: 0.4em;
+      color: var(--gold-dim);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      animation: fadeUp 1s ease 0.2s both;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(48px, 8vw, 96px);
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+      letter-spacing: 0.05em;
+      animation: fadeUp 1s ease 0.4s both;
+      text-shadow: 0 0 80px rgba(201,168,76,0.3);
+    }
+
+    .hero-tagline {
+      margin-top: 32px;
+      font-size: 22px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--muted);
+      max-width: 520px;
+      animation: fadeUp 1s ease 0.6s both;
+    }
+
+    .hero-desc {
+      margin-top: 24px;
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 520px;
+      animation: fadeUp 1s ease 0.7s both;
+    }
+
+    .hero-divider {
+      width: 1px;
+      height: 80px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      margin: 64px auto 0;
+      animation: fadeUp 1s ease 0.9s both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* SECTION HEADERS */
+    .section-label {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 0.4em;
+      color: var(--gold-dim);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 48px;
+      line-height: 1.2;
+    }
+
+    /* ABOUT */
+    #about {
+      padding: 120px 48px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .nine-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .nine-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .nine-list li::before {
+      content: '◈';
+      color: var(--gold);
+      font-size: 12px;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+
+    /* APPS */
+    #apps {
+      padding: 120px 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+    }
+
+    .app-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 40px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .app-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 2px;
+      background: linear-gradient(to right, var(--gold), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .app-card:hover {
+      border-color: rgba(201,168,76,0.35);
+      transform: translateY(-4px);
+    }
+
+    .app-card:hover::before { opacity: 1; }
+
+    .app-icon {
+      width: 56px;
+      height: 56px;
+      margin-bottom: 24px;
+    }
+
+    .app-name {
+      font-family: 'Cinzel', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .app-category {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      color: var(--gold-dim);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .app-desc {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+
+    .app-badge {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border: 1px solid;
+      border-radius: 2px;
+      margin-bottom: 24px;
+    }
+
+    .badge-live {
+      color: #6ec97a;
+      border-color: rgba(110, 201, 122, 0.3);
+      background: rgba(110, 201, 122, 0.05);
+    }
+
+    .badge-soon {
+      color: var(--gold-dim);
+      border-color: rgba(201,168,76,0.2);
+    }
+
+    .store-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 10px 18px;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+
+    .store-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* PRIVACY */
+    #privacy {
+      padding: 120px 48px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .privacy-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 48px;
+    }
+
+    .privacy-block h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      color: var(--gold);
+      margin: 32px 0 12px;
+      font-weight: 600;
+    }
+
+    .privacy-block h3:first-child { margin-top: 0; }
+
+    .privacy-block p, .privacy-block ul {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .privacy-block ul {
+      padding-left: 20px;
+    }
+
+    /* CONTACT */
+    #contact {
+      padding: 120px 48px;
+      text-align: center;
+    }
+
+    .contact-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Cinzel', serif;
+      font-size: 18px;
+      color: var(--gold);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 20px 40px;
+      border-radius: 2px;
+      margin-top: 48px;
+      transition: all 0.3s;
+      letter-spacing: 0.05em;
+    }
+
+    .contact-email:hover {
+      background: rgba(201,168,76,0.05);
+      border-color: var(--gold);
+      box-shadow: 0 0 40px rgba(201,168,76,0.1);
+    }
+
+    /* FOOTER */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 40px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      letter-spacing: 0.3em;
+      color: var(--gold-dim);
+      text-transform: uppercase;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ORNAMENT */
+    .ornament {
+      text-align: center;
+      color: var(--gold-dim);
+      font-size: 20px;
+      letter-spacing: 16px;
+      margin: 0 auto 64px;
+      opacity: 0.5;
+    }
+
+    /* I18N */
+    [data-lang] { display: none; }
+    [data-lang].visible { display: block; }
+    .inline-lang { display: none; }
+    .inline-lang.visible { display: inline; }
+
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+      .nav-links { display: none; }
+      .lang-toggle { top: 20px; right: 24px; }
+      #about, #apps, #privacy, #contact { padding: 80px 24px; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+
+<div class="lang-toggle">
+  <button onclick="setLang('fr')" class="active" id="btn-fr">FR</button>
+  <button onclick="setLang('en')" id="btn-en">EN</button>
+</div>
+
+<nav>
+  <a class="nav-logo" href="#hero">Ennead Studio</a>
+  <ul class="nav-links">
+    <li><a href="#about"><span data-lang="fr" class="visible">Studio</span><span data-lang="en">Studio</span></a></li>
+    <li><a href="#apps"><span data-lang="fr" class="visible">Applications</span><span data-lang="en">Apps</span></a></li>
+    <li><a href="#privacy"><span data-lang="fr" class="visible">Confidentialité</span><span data-lang="en">Privacy</span></a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="ennead-emblem">
+    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="60" cy="60" r="58" stroke="#c9a84c" stroke-width="0.5" opacity="0.3"/>
+      <circle cx="60" cy="60" r="40" stroke="#c9a84c" stroke-width="0.5" opacity="0.2"/>
+      <!-- 9 stars of the Ennead -->
+      <circle cx="60" cy="14" r="3" fill="#c9a84c"/>
+      <circle cx="91" cy="27" r="2.5" fill="#c9a84c" opacity="0.8"/>
+      <circle cx="106" cy="60" r="3" fill="#c9a84c"/>
+      <circle cx="91" cy="93" r="2.5" fill="#c9a84c" opacity="0.8"/>
+      <circle cx="60" cy="106" r="3" fill="#c9a84c"/>
+      <circle cx="29" cy="93" r="2.5" fill="#c9a84c" opacity="0.8"/>
+      <circle cx="14" cy="60" r="3" fill="#c9a84c"/>
+      <circle cx="29" cy="27" r="2.5" fill="#c9a84c" opacity="0.8"/>
+      <!-- Center - the eye -->
+      <ellipse cx="60" cy="60" rx="18" ry="10" stroke="#c9a84c" stroke-width="1.2"/>
+      <circle cx="60" cy="60" r="5" fill="#c9a84c"/>
+      <circle cx="60" cy="60" r="2.5" fill="#07080f"/>
+      <!-- Lines connecting stars -->
+      <line x1="60" y1="17" x2="60" y2="50" stroke="#c9a84c" stroke-width="0.3" opacity="0.3"/>
+      <line x1="89" y1="29" x2="75" y2="54" stroke="#c9a84c" stroke-width="0.3" opacity="0.3"/>
+      <line x1="103" y1="60" x2="78" y2="60" stroke="#c9a84c" stroke-width="0.3" opacity="0.3"/>
+      <line x1="89" y1="91" x2="75" y2="66" stroke="#c9a84c" stroke-width="0.3" opacity="0.3"/>
+      <line x1="60" y1="103" x2="60" y2="70" stroke="#c9a84c" stroke-width="0.3" opacity="0.3"/>
+      <line x1="31" y1="91" x2="45" y2="66" stroke="#c9a84c" stroke-width="0.3" opacity="0.3"/>
+      <line x1="17" y1="60" x2="42" y2="60" stroke="#c9a84c" stroke-width="0.3" opacity="0.3"/>
+      <line x1="31" y1="29" x2="45" y2="54" stroke="#c9a84c" stroke-width="0.3" opacity="0.3"/>
+    </svg>
+  </div>
+
+  <p class="hero-subtitle">
+    <span data-lang="fr" class="visible">Studio Indépendant · Paris</span>
+    <span data-lang="en">Independent Studio · Paris</span>
+  </p>
+
+  <h1>ENNEAD<br>STUDIO</h1>
+
+  <p class="hero-tagline">
+    <span data-lang="fr" class="visible">Des applications conçues avec intention.</span>
+    <span data-lang="en">Apps crafted with intention.</span>
+  </p>
+
+  <p class="hero-desc">
+    <span data-lang="fr" class="visible">Inspiré du panthéon égyptien, Ennead Studio crée des expériences mobiles mémorables — pour les enfants, les curieux, et ceux qui cherchent à grandir.</span>
+    <span data-lang="en">Inspired by the Egyptian pantheon, Ennead Studio crafts memorable mobile experiences — for children, the curious, and those who seek to grow.</span>
+  </p>
+
+  <div class="hero-divider"></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div>
+      <p class="section-label">
+        <span data-lang="fr" class="visible">Le Studio</span>
+        <span data-lang="en">The Studio</span>
+      </p>
+      <h2 class="section-title">
+        <span data-lang="fr" class="visible">Neuf dieux.<br>Un studio.</span>
+        <span data-lang="en">Nine gods.<br>One studio.</span>
+      </h2>
+      <div class="about-text">
+        <p data-lang="fr" class="visible">L'Ennéade égyptienne réunit les neuf divinités primordiales d'Héliopolis. Chaque dieu incarne un principe fondateur — sagesse, protection, justice, création.</p>
+        <p data-lang="en">The Egyptian Ennead gathers the nine primordial deities of Heliopolis. Each god embodies a founding principle — wisdom, protection, justice, creation.</p>
+        <p data-lang="fr" class="visible">C'est ce même souffle qui guide Ennead Studio : des applications pensées avec soin, pour des usages réels, par un développeur indépendant basé à Paris.</p>
+        <p data-lang="en">This same spirit guides Ennead Studio: apps designed with care, for real uses, by an independent developer based in Paris.</p>
+      </div>
+    </div>
+    <div>
+      <p class="section-label" style="margin-bottom:24px;">
+        <span data-lang="fr" class="visible">Nos principes</span>
+        <span data-lang="en">Our principles</span>
+      </p>
+      <ul class="nine-list">
+        <li><span data-lang="fr" class="visible">Respect de la vie privée — zéro collecte de données inutiles</span><span data-lang="en">Privacy first — no unnecessary data collection</span></li>
+        <li><span data-lang="fr" class="visible">Expériences pensées pour l'humain, pas pour l'algorithme</span><span data-lang="en">Human-centered experiences, not algorithm-driven</span></li>
+        <li><span data-lang="fr" class="visible">Design intentionnel et sobre</span><span data-lang="en">Intentional, restrained design</span></li>
+        <li><span data-lang="fr" class="visible">Sécurité enfants garantie sur toutes nos apps jeunesse</span><span data-lang="en">Child safety guaranteed on all our kids apps</span></li>
+        <li><span data-lang="fr" class="visible">Développement indépendant et transparent</span><span data-lang="en">Independent and transparent development</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- APPS -->
+<section id="apps">
+  <div style="text-align:center; margin-bottom: 64px;">
+    <p class="section-label">
+      <span data-lang="fr" class="visible">Nos Applications</span>
+      <span data-lang="en">Our Apps</span>
+    </p>
+    <h2 class="section-title">
+      <span data-lang="fr" class="visible">Le Panthéon</span>
+      <span data-lang="en">The Pantheon</span>
+    </h2>
+  </div>
+
+  <div class="apps-grid">
+
+    <!-- Tot & Batet -->
+    <div class="app-card">
+      <svg class="app-icon" viewBox="0 0 56 56" fill="none">
+        <rect width="56" height="56" rx="14" fill="#13162a"/>
+        <circle cx="28" cy="22" r="10" stroke="#c9a84c" stroke-width="1.2"/>
+        <path d="M20 34 Q28 44 36 34" stroke="#c9a84c" stroke-width="1.2" fill="none"/>
+        <circle cx="24" cy="20" r="2" fill="#c9a84c"/>
+        <circle cx="32" cy="20" r="2" fill="#c9a84c"/>
+      </svg>
+      <p class="app-category">
+        <span data-lang="fr" class="visible">Audio · Jeunesse</span>
+        <span data-lang="en">Audio · Kids</span>
+      </p>
+      <h3 class="app-name">Tot &amp; Batet</h3>
+      <span class="app-badge badge-live">
+        <span data-lang="fr" class="visible">Disponible</span>
+        <span data-lang="en">Available</span>
+      </span>
+      <p class="app-desc">
+        <span data-lang="fr" class="visible">Le lecteur d'histoires interactives qui fait rêver les enfants et rassure les parents. Smartphone transformé en boîte à histoires sécurisée, avec contrôle parental complet.</span>
+        <span data-lang="en">The interactive story player that sparks children's imagination and reassures parents. Your smartphone becomes a safe story box, with full parental control.</span>
+      </p>
+      <div class="store-links">
+        <a href="https://play.google.com/store" class="store-btn" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17c0-.83 1-.95 1.45-.5l14 8.5-14 8.5c-.45.45-1.45.33-1.45-.5z"/></svg>
+          Google Play
+        </a>
+        <a href="https://www.totetbatet.com" class="store-btn" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+          Site web
+        </a>
+      </div>
+    </div>
+
+    <!-- Horus & Ptah -->
+    <div class="app-card">
+      <svg class="app-icon" viewBox="0 0 56 56" fill="none">
+        <rect width="56" height="56" rx="14" fill="#13162a"/>
+        <circle cx="28" cy="28" r="14" stroke="#c9a84c" stroke-width="1" opacity="0.4"/>
+        <circle cx="28" cy="28" r="8" stroke="#c9a84c" stroke-width="1.2"/>
+        <circle cx="28" cy="28" r="3" fill="#c9a84c"/>
+        <line x1="28" y1="10" x2="28" y2="20" stroke="#c9a84c" stroke-width="1" opacity="0.5"/>
+        <line x1="28" y1="36" x2="28" y2="46" stroke="#c9a84c" stroke-width="1" opacity="0.5"/>
+        <line x1="10" y1="28" x2="20" y2="28" stroke="#c9a84c" stroke-width="1" opacity="0.5"/>
+        <line x1="36" y1="28" x2="46" y2="28" stroke="#c9a84c" stroke-width="1" opacity="0.5"/>
+      </svg>
+      <p class="app-category">
+        <span data-lang="fr" class="visible">Développement personnel · Bien-être</span>
+        <span data-lang="en">Personal growth · Wellbeing</span>
+      </p>
+      <h3 class="app-name">Horus &amp; Ptah</h3>
+      <span class="app-badge badge-soon">
+        <span data-lang="fr" class="visible">Bientôt</span>
+        <span data-lang="en">Coming soon</span>
+      </span>
+      <p class="app-desc">
+        <span data-lang="fr" class="visible">Une application de développement personnel et de self-care, inspirée par la vision perçante d'Horus et le pouvoir créateur de Ptah. En cours de développement.</span>
+        <span data-lang="en">A personal development and self-care app, inspired by the sharp vision of Horus and the creative power of Ptah. Currently in development.</span>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRIVACY -->
+<section id="privacy">
+  <div style="text-align:center; margin-bottom: 48px;">
+    <p class="section-label">
+      <span data-lang="fr" class="visible">Données & Vie privée</span>
+      <span data-lang="en">Data & Privacy</span>
+    </p>
+    <h2 class="section-title">
+      <span data-lang="fr" class="visible">Politique de Confidentialité</span>
+      <span data-lang="en">Privacy Policy</span>
+    </h2>
+  </div>
+
+  <div class="privacy-block">
+    <div data-lang="fr" class="visible">
+      <h3>Principe fondamental</h3>
+      <p>Ennead Studio collecte le strict minimum. Notre philosophie : les meilleures données sont celles que nous ne stockons pas.</p>
+
+      <h3>Données collectées</h3>
+      <p>Nos applications <strong>ne collectent aucune donnée personnelle identifiable</strong>. Nous n'accédons pas à votre nom, email, localisation ou contacts.</p>
+      <p>L'authentification, lorsqu'elle est nécessaire, est déléguée à Google ou Apple via OAuth2. Nous ne stockons qu'un identifiant opaque anonyme — jamais votre adresse email ou vos informations personnelles.</p>
+
+      <h3>Applications jeunesse (Tot & Batet)</h3>
+      <p>Tot & Batet est conçue pour les enfants. Elle ne contient <strong>aucune publicité</strong>, ne collecte aucune donnée, et respecte strictement le RGPD et les réglementations relatives aux mineurs (COPPA).</p>
+
+      <h3>Publicité</h3>
+      <p>Certaines de nos applications pour adultes peuvent contenir de la publicité via Google AdMob. Ces publicités respectent les standards RGPD. Elles ne sont jamais présentes dans nos applications jeunesse.</p>
+
+      <h3>Vos droits</h3>
+      <p>Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression. Contactez-nous à <a href="mailto:enneadstudio@gmail.com" style="color:var(--gold)">enneadstudio@gmail.com</a>.</p>
+
+      <h3>Contact</h3>
+      <p>Ennead Studio — Paris, France<br>
+      Responsable : Nicolas Bridelance<br>
+      <a href="mailto:enneadstudio@gmail.com" style="color:var(--gold)">enneadstudio@gmail.com</a></p>
+
+      <p style="margin-top:24px; font-size:14px; opacity:0.5;">Dernière mise à jour : mai 2026</p>
+    </div>
+
+    <div data-lang="en">
+      <h3>Core principle</h3>
+      <p>Ennead Studio collects the strict minimum. Our philosophy: the best data is the data we don't store.</p>
+
+      <h3>Data collected</h3>
+      <p>Our apps <strong>collect no personally identifiable information</strong>. We do not access your name, email, location, or contacts.</p>
+      <p>When authentication is required, it is delegated to Google or Apple via OAuth2. We only store an anonymous opaque identifier — never your email address or personal information.</p>
+
+      <h3>Children's apps (Tot & Batet)</h3>
+      <p>Tot & Batet is designed for children. It contains <strong>no advertising</strong>, collects no data, and strictly complies with GDPR and children's regulations (COPPA).</p>
+
+      <h3>Advertising</h3>
+      <p>Some of our adult applications may display advertising via Google AdMob. These ads comply with GDPR standards. They are never present in our children's applications.</p>
+
+      <h3>Your rights</h3>
+      <p>Under GDPR, you have the right to access, correct, and delete your data. Contact us at <a href="mailto:enneadstudio@gmail.com" style="color:var(--gold)">enneadstudio@gmail.com</a>.</p>
+
+      <h3>Contact</h3>
+      <p>Ennead Studio — Paris, France<br>
+      Developer: Nicolas Bridelance<br>
+      <a href="mailto:enneadstudio@gmail.com" style="color:var(--gold)">enneadstudio@gmail.com</a></p>
+
+      <p style="margin-top:24px; font-size:14px; opacity:0.5;">Last updated: May 2026</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <p class="section-label">Contact</p>
+    <h2 class="section-title">
+      <span data-lang="fr" class="visible">Une question ?<br>Un projet ?</span>
+      <span data-lang="en">A question?<br>A project?</span>
+    </h2>
+    <p style="color:var(--muted); max-width:420px; margin: 0 auto;">
+      <span data-lang="fr" class="visible">Partenariats éditeurs, presse, retours utilisateurs — toutes les demandes sont les bienvenues.</span>
+      <span data-lang="en">Publisher partnerships, press, user feedback — all inquiries are welcome.</span>
+    </p>
+    <a href="mailto:enneadstudio@gmail.com" class="contact-email">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+      enneadstudio@gmail.com
+    </a>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">Ennead Studio</span>
+  <span class="footer-copy">
+    <span data-lang="fr" class="visible">© 2026 Ennead Studio · Paris, France</span>
+    <span data-lang="en">© 2026 Ennead Studio · Paris, France</span>
+  </span>
+</footer>
+
+<script>
+  // STARFIELD
+  const canvas = document.getElementById('stars');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  function initStars() {
+    stars = [];
+    for (let i = 0; i < 180; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.2 + 0.2,
+        o: Math.random() * 0.5 + 0.1,
+        speed: Math.random() * 0.3 + 0.05,
+        phase: Math.random() * Math.PI * 2
+      });
+    }
+  }
+
+  function drawStars(t) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => {
+      const o = s.o * (0.7 + 0.3 * Math.sin(t * s.speed + s.phase));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(201,168,76,${o})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(ts => drawStars(ts / 1000));
+  }
+
+  resize();
+  initStars();
+  drawStars(0);
+  window.addEventListener('resize', () => { resize(); initStars(); });
+
+  // LANG
+  function setLang(lang) {
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      el.classList.toggle('visible', el.dataset.lang === lang);
+    });
+    document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.documentElement.lang = lang;
+  }
+
+  // Detect browser language
+  const browserLang = navigator.language.startsWith('fr') ? 'fr' : 'en';
+  setLang(browserLang);
+</script>
+
+</body>
+</html>
