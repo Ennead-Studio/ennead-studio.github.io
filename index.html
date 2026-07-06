@@ -10,13 +10,13 @@
     :root {
       --gold: #c9a84c;
       --gold-light: #e8cc7a;
-      --gold-dim: #7a6130;
-      --night: #07080f;
-      --deep: #0d0f1e;
-      --surface: #13162a;
-      --border: rgba(201,168,76,0.15);
-      --text: #e8e0cc;
-      --muted: #8a8070;
+      --gold-dim: #96805a;
+      --night: #26262a;
+      --deep: #2e2e33;
+      --surface: #3a3a40;
+      --border: rgba(201,168,76,0.25);
+      --text: #f3ece0;
+      --muted: #b8ae9c;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -81,7 +81,7 @@
       padding: 24px 48px;
       display: flex;
       align-items: center;
-      background: linear-gradient(to bottom, rgba(7,8,15,0.95), transparent);
+      background: linear-gradient(to bottom, rgba(38,38,42,0.95), transparent);
     }
     .nav-logo {
       font-family: 'Cinzel', serif;
@@ -108,7 +108,9 @@
       text-transform: uppercase;
       transition: color 0.2s;
     }
+    .nav-links a { display: inline-flex; align-items: center; }
     .nav-links a:hover { color: var(--gold); }
+    .nav-links [data-lang].visible { display: inline; }
 
     /* SECTIONS */
     section {
@@ -293,6 +295,14 @@
     }
 
     .app-card:hover::before { opacity: 1; }
+
+    .app-card.is-live {
+      border-color: rgba(110,201,122,0.2);
+    }
+
+    .app-card.is-live:hover {
+      border-color: rgba(110,201,122,0.4);
+    }
 
     .app-icon {
       width: 56px;
@@ -532,7 +542,7 @@
       <!-- Center - the eye -->
       <ellipse cx="60" cy="60" rx="18" ry="10" stroke="#c9a84c" stroke-width="1.2"/>
       <circle cx="60" cy="60" r="5" fill="#c9a84c"/>
-      <circle cx="60" cy="60" r="2.5" fill="#07080f"/>
+      <circle cx="60" cy="60" r="2.5" fill="#26262a"/>
       <!-- Lines connecting stars -->
       <line x1="60" y1="17" x2="60" y2="50" stroke="#c9a84c" stroke-width="0.3" opacity="0.3"/>
       <line x1="89" y1="29" x2="75" y2="54" stroke="#c9a84c" stroke-width="0.3" opacity="0.3"/>
@@ -615,42 +625,8 @@
 
   <div class="apps-grid">
 
-    <!-- Tot & Batet -->
-    <div class="app-card">
-      <svg class="app-icon" viewBox="0 0 56 56" fill="none">
-        <rect width="56" height="56" rx="14" fill="#13162a"/>
-        <circle cx="28" cy="22" r="10" stroke="#c9a84c" stroke-width="1.2"/>
-        <path d="M20 34 Q28 44 36 34" stroke="#c9a84c" stroke-width="1.2" fill="none"/>
-        <circle cx="24" cy="20" r="2" fill="#c9a84c"/>
-        <circle cx="32" cy="20" r="2" fill="#c9a84c"/>
-      </svg>
-      <p class="app-category">
-        <span data-lang="fr" class="visible">Audio · Jeunesse</span>
-        <span data-lang="en">Audio · Kids</span>
-      </p>
-      <h3 class="app-name">Tot &amp; Batet</h3>
-      <span class="app-badge badge-live">
-        <span data-lang="fr" class="visible">Disponible</span>
-        <span data-lang="en">Available</span>
-      </span>
-      <p class="app-desc">
-        <span data-lang="fr" class="visible">Le lecteur d'histoires interactives qui fait rêver les enfants et rassure les parents. Smartphone transformé en boîte à histoires sécurisée, avec contrôle parental complet.</span>
-        <span data-lang="en">The interactive story player that sparks children's imagination and reassures parents. Your smartphone becomes a safe story box, with full parental control.</span>
-      </p>
-      <div class="store-links">
-        <a href="https://play.google.com/store" class="store-btn" target="_blank">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17c0-.83 1-.95 1.45-.5l14 8.5-14 8.5c-.45.45-1.45.33-1.45-.5z"/></svg>
-          Google Play
-        </a>
-        <a href="https://www.totetbatet.com" class="store-btn" target="_blank">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
-          Site web
-        </a>
-      </div>
-    </div>
-
     <!-- HapiCook -->
-    <div class="app-card">
+    <div class="app-card is-live">
       <svg class="app-icon" viewBox="0 0 56 56" fill="none">
         <rect width="56" height="56" rx="14" fill="#13162a"/>
         <path d="M15 27 Q15 41 28 41 Q41 41 41 27 Z" stroke="#c9a84c" stroke-width="1.2" fill="none"/>
@@ -666,13 +642,43 @@
         <span data-lang="en">Cooking · Recipes</span>
       </p>
       <h3 class="app-name">HapiCook</h3>
+      <span class="app-badge badge-live">
+        <span data-lang="fr" class="visible">Disponible</span>
+        <span data-lang="en">Available</span>
+      </span>
+      <p class="app-desc">
+        <span data-lang="fr" class="visible">1 555 recettes végétariennes internationales guidées pas à pas, compatibles avec votre robot de cuisine (Monsieur Cuisine Connect+). Planificateur de menus, liste de courses intelligente et glossaire culinaire — sans compte à créer.</span>
+        <span data-lang="en">1,555 international vegetarian recipes with step-by-step guidance, compatible with your kitchen robot (Monsieur Cuisine Connect+). Meal planner, smart shopping list and culinary glossary — no account required.</span>
+      </p>
+      <div class="store-links">
+        <a href="https://play.google.com/store/apps/details?id=com.ennead.hapicook" class="store-btn" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17c0-.83 1-.95 1.45-.5l14 8.5-14 8.5c-.45.45-1.45.33-1.45-.5z"/></svg>
+          Google Play
+        </a>
+      </div>
+    </div>
+
+    <!-- Tot & Batet -->
+    <div class="app-card">
+      <svg class="app-icon" viewBox="0 0 56 56" fill="none">
+        <rect width="56" height="56" rx="14" fill="#13162a"/>
+        <circle cx="28" cy="22" r="10" stroke="#c9a84c" stroke-width="1.2"/>
+        <path d="M20 34 Q28 44 36 34" stroke="#c9a84c" stroke-width="1.2" fill="none"/>
+        <circle cx="24" cy="20" r="2" fill="#c9a84c"/>
+        <circle cx="32" cy="20" r="2" fill="#c9a84c"/>
+      </svg>
+      <p class="app-category">
+        <span data-lang="fr" class="visible">Audio · Jeunesse</span>
+        <span data-lang="en">Audio · Kids</span>
+      </p>
+      <h3 class="app-name">Tot &amp; Batet</h3>
       <span class="app-badge badge-soon">
         <span data-lang="fr" class="visible">Bientôt</span>
         <span data-lang="en">Coming soon</span>
       </span>
       <p class="app-desc">
-        <span data-lang="fr" class="visible">1 555 recettes végétariennes internationales guidées pas à pas. Planificateur de menus, liste de courses intelligente et glossaire culinaire — entièrement hors-ligne.</span>
-        <span data-lang="en">1,555 international vegetarian recipes with step-by-step guidance. Meal planner, smart shopping list and culinary glossary — fully offline.</span>
+        <span data-lang="fr" class="visible">Le lecteur d'histoires interactives qui fait rêver les enfants et rassure les parents. Smartphone transformé en boîte à histoires sécurisée, avec contrôle parental complet.</span>
+        <span data-lang="en">The interactive story player that sparks children's imagination and reassures parents. Your smartphone becomes a safe story box, with full parental control.</span>
       </p>
     </div>
 
