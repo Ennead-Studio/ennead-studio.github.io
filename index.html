@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ennead Studio</title>
+  <meta name="description" content="Ennead Studio, studio indépendant à Paris : HapiCook (recettes végétariennes), Tot &amp; Batet (histoires pour enfants), Horus &amp; Ptah (self-care) et md2nativedocx (Markdown vers Word). Sobriété, vie privée, sans publicité.">
+  <meta property="og:title" content="Ennead Studio">
+  <meta property="og:description" content="Des applications conçues avec intention : sobres, respectueuses de la vie privée, sans publicité.">
+  <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
   <style>
@@ -503,6 +507,49 @@
       .about-grid { grid-template-columns: 1fr; gap: 40px; }
       footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
     }
+
+    /* --- refresh nov. 2026 --- */
+    .hero-ctas { margin-top: 40px; display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; animation: fadeUp 1s ease 0.8s both; }
+    .btn-gold, .btn-line {
+      font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 14px 26px; border-radius: 2px; text-decoration: none; transition: all 0.2s;
+    }
+    .btn-gold { background: var(--gold); color: var(--night); border: 1px solid var(--gold); }
+    .btn-gold:hover { background: var(--gold-light); }
+    .btn-line { color: var(--gold); border: 1px solid var(--border); }
+    .btn-line:hover { border-color: var(--gold); }
+
+    .myth-note { margin-top: 28px; padding: 20px 24px; border-left: 2px solid var(--gold); background: rgba(201,168,76,0.05); color: var(--muted); font-style: italic; }
+
+    #principles { padding: 40px 48px 120px; max-width: 1100px; margin: 0 auto; }
+    .principles-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+    @media (max-width: 1100px) { .principles-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .principles-grid { grid-template-columns: 1fr; } }
+    .apps-grid { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 800px) { .apps-grid { grid-template-columns: 1fr; } }
+    .principle { border: 1px solid var(--border); padding: 24px; border-radius: 2px; background: rgba(58,58,64,0.5); }
+    .principle .glyph { font-size: 22px; color: var(--gold); margin-bottom: 12px; display: block; }
+    .principle h3 { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 0.08em; color: var(--gold); margin-bottom: 10px; font-weight: 600; }
+    .principle p { color: var(--muted); font-size: 16px; line-height: 1.55; }
+
+    .app-deity { font-size: 15px; font-style: italic; color: var(--gold-dim); margin: -4px 0 16px; }
+    .app-meta { font-size: 14px; color: var(--muted); border-top: 1px solid var(--border); padding-top: 14px; margin: -12px 0 24px; }
+    .badge-test { color: #8fb8e0; border-color: rgba(143,184,224,0.3); }
+    .badge-pause { color: #d8a37a; border-color: rgba(216,163,122,0.3); }
+
+    .legend { text-align: center; color: var(--muted); font-size: 14px; margin-top: 40px; }
+    .legend span { margin: 0 10px; white-space: nowrap; }
+
+    .privacy-block h4 { font-family: 'Cinzel', serif; font-size: 13px; color: var(--gold-light); margin: 22px 0 8px; letter-spacing: 0.06em; }
+    .footer-links { display: flex; gap: 22px; flex-wrap: wrap; font-size: 14px; }
+    .footer-links a { color: var(--muted); text-decoration: none; }
+    .footer-links a:hover { color: var(--gold); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: flex; position: fixed; top: 60px; left: 0; right: 0; justify-content: center; gap: 18px; margin: 0; padding: 8px 0; background: rgba(38,38,42,0.92); }
+      .nav-links a { font-size: 10px; }
+      #principles { padding: 20px 24px 80px; }
+    }
   </style>
 </head>
 <body>
@@ -518,7 +565,7 @@
   <a class="nav-logo" href="#hero">Ennead Studio</a>
   <ul class="nav-links">
     <li><a href="#about"><span data-lang="fr" class="visible">Studio</span><span data-lang="en">Studio</span></a></li>
-    <li><a href="#apps"><span data-lang="fr" class="visible">Applications</span><span data-lang="en">Apps</span></a></li>
+    <li><a href="#apps"><span data-lang="fr" class="visible">Créations</span><span data-lang="en">Work</span></a></li>
     <li><a href="#privacy"><span data-lang="fr" class="visible">Confidentialité</span><span data-lang="en">Privacy</span></a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -527,10 +574,9 @@
 <!-- HERO -->
 <section id="hero">
   <div class="ennead-emblem">
-    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <circle cx="60" cy="60" r="58" stroke="#c9a84c" stroke-width="0.5" opacity="0.3"/>
       <circle cx="60" cy="60" r="40" stroke="#c9a84c" stroke-width="0.5" opacity="0.2"/>
-      <!-- 9 stars of the Ennead -->
       <circle cx="60" cy="14" r="3" fill="#c9a84c"/>
       <circle cx="91" cy="27" r="2.5" fill="#c9a84c" opacity="0.8"/>
       <circle cx="106" cy="60" r="3" fill="#c9a84c"/>
@@ -539,11 +585,9 @@
       <circle cx="29" cy="93" r="2.5" fill="#c9a84c" opacity="0.8"/>
       <circle cx="14" cy="60" r="3" fill="#c9a84c"/>
       <circle cx="29" cy="27" r="2.5" fill="#c9a84c" opacity="0.8"/>
-      <!-- Center - the eye -->
       <ellipse cx="60" cy="60" rx="18" ry="10" stroke="#c9a84c" stroke-width="1.2"/>
       <circle cx="60" cy="60" r="5" fill="#c9a84c"/>
       <circle cx="60" cy="60" r="2.5" fill="#26262a"/>
-      <!-- Lines connecting stars -->
       <line x1="60" y1="17" x2="60" y2="50" stroke="#c9a84c" stroke-width="0.3" opacity="0.3"/>
       <line x1="89" y1="29" x2="75" y2="54" stroke="#c9a84c" stroke-width="0.3" opacity="0.3"/>
       <line x1="103" y1="60" x2="78" y2="60" stroke="#c9a84c" stroke-width="0.3" opacity="0.3"/>
@@ -556,8 +600,8 @@
   </div>
 
   <p class="hero-subtitle">
-    <span data-lang="fr" class="visible">Studio Indépendant · Paris</span>
-    <span data-lang="en">Independent Studio · Paris</span>
+    <span data-lang="fr" class="visible">Studio indépendant · Paris</span>
+    <span data-lang="en">Independent studio · Paris</span>
   </p>
 
   <h1>ENNEAD<br>STUDIO</h1>
@@ -568,9 +612,14 @@
   </p>
 
   <p class="hero-desc">
-    <span data-lang="fr" class="visible">Inspiré du panthéon égyptien, Ennead Studio crée des expériences mobiles mémorables — pour les enfants, les curieux, et ceux qui cherchent à grandir.</span>
-    <span data-lang="en">Inspired by the Egyptian pantheon, Ennead Studio crafts memorable mobile experiences — for children, the curious, and those who seek to grow.</span>
+    <span data-lang="fr" class="visible">Des outils sobres pour le quotidien : cuisiner, raconter des histoires aux enfants, prendre soin de soi, écrire. Chacun placé sous le signe d'une divinité égyptienne, chacun pensé pour respecter votre temps et vos données.</span>
+    <span data-lang="en">Quiet tools for everyday life: cooking, telling stories to children, caring for yourself, writing. Each one placed under the sign of an Egyptian deity, each one designed to respect your time and your data.</span>
   </p>
+
+  <div class="hero-ctas">
+    <a class="btn-gold" href="#apps"><span data-lang="fr" class="visible">Voir les créations</span><span data-lang="en">See the work</span></a>
+    <a class="btn-line" href="#contact"><span data-lang="fr" class="visible">Nous écrire</span><span data-lang="en">Get in touch</span></a>
+  </div>
 
   <div class="hero-divider"></div>
 </section>
@@ -580,32 +629,62 @@
   <div class="about-grid">
     <div>
       <p class="section-label">
-        <span data-lang="fr" class="visible">Le Studio</span>
-        <span data-lang="en">The Studio</span>
+        <span data-lang="fr" class="visible">Le studio</span>
+        <span data-lang="en">The studio</span>
       </p>
       <h2 class="section-title">
         <span data-lang="fr" class="visible">Neuf dieux.<br>Un studio.</span>
         <span data-lang="en">Nine gods.<br>One studio.</span>
       </h2>
-      <div class="about-text">
-        <p data-lang="fr" class="visible">L'Ennéade égyptienne réunit les neuf divinités primordiales d'Héliopolis. Chaque dieu incarne un principe fondateur — sagesse, protection, justice, création.</p>
-        <p data-lang="en">The Egyptian Ennead gathers the nine primordial deities of Heliopolis. Each god embodies a founding principle — wisdom, protection, justice, creation.</p>
-        <p data-lang="fr" class="visible">C'est ce même souffle qui guide Ennead Studio : des applications pensées avec soin, pour des usages réels, par un développeur indépendant basé à Paris.</p>
-        <p data-lang="en">This same spirit guides Ennead Studio: apps designed with care, for real uses, by an independent developer based in Paris.</p>
-      </div>
     </div>
-    <div>
-      <p class="section-label" style="margin-bottom:24px;">
-        <span data-lang="fr" class="visible">Nos principes</span>
-        <span data-lang="en">Our principles</span>
-      </p>
-      <ul class="nine-list">
-        <li><span data-lang="fr" class="visible">Respect de la vie privée — zéro collecte de données inutiles</span><span data-lang="en">Privacy first — no unnecessary data collection</span></li>
-        <li><span data-lang="fr" class="visible">Expériences pensées pour l'humain, pas pour l'algorithme</span><span data-lang="en">Human-centered experiences, not algorithm-driven</span></li>
-        <li><span data-lang="fr" class="visible">Design intentionnel et sobre</span><span data-lang="en">Intentional, restrained design</span></li>
-        <li><span data-lang="fr" class="visible">Sécurité enfants garantie sur toutes nos apps jeunesse</span><span data-lang="en">Child safety guaranteed on all our kids apps</span></li>
-        <li><span data-lang="fr" class="visible">Développement indépendant et transparent</span><span data-lang="en">Independent and transparent development</span></li>
-      </ul>
+    <div class="about-text">
+      <p data-lang="fr" class="visible">L'Ennéade réunit les neuf divinités primordiales d'Héliopolis. Chacune incarne un principe : l'abondance, le savoir, la protection, la création…</p>
+      <p data-lang="en">The Ennead gathers the nine primordial deities of Heliopolis. Each embodies a principle: abundance, knowledge, protection, creation…</p>
+      <p data-lang="fr" class="visible">Ennead Studio, c'est Nicolas Bridelance, développeur indépendant à Paris. Chaque projet du studio part d'un usage réel, souvent familial, et reçoit sa divinité tutélaire : elle rappelle à quoi il sert.</p>
+      <p data-lang="en">Ennead Studio is Nicolas Bridelance, an independent developer in Paris. Every project starts from a real need, often a family one, and receives a guardian deity as a reminder of what it is for.</p>
+      <p class="myth-note" data-lang="fr">Hâpy nourrit, Thot raconte, Bastet protège, Horus éclaire, Ptah façonne, Seshat écrit.</p>
+      <p class="myth-note" data-lang="en">Hapi nourishes, Thoth tells, Bastet protects, Horus sees, Ptah shapes, Seshat writes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRINCIPLES -->
+<section id="principles">
+  <div style="text-align:center; margin-bottom: 48px;">
+    <p class="section-label">
+      <span data-lang="fr" class="visible">Ce qui relie nos créations</span>
+      <span data-lang="en">What our work has in common</span>
+    </p>
+    <h2 class="section-title" style="margin-bottom:0">
+      <span data-lang="fr" class="visible">Cinq engagements</span>
+      <span data-lang="en">Five commitments</span>
+    </h2>
+  </div>
+  <div class="principles-grid">
+    <div class="principle">
+      <span class="glyph">☾</span>
+      <h3><span data-lang="fr" class="visible">Sobriété</span><span data-lang="en">Restraint</span></h3>
+      <p><span data-lang="fr" class="visible">Moins d'écran, moins de bruit. Pas de fil infini ni de notifications pour vous retenir.</span><span data-lang="en">Less screen, less noise. No endless feed, no notifications designed to hold you.</span></p>
+    </div>
+    <div class="principle">
+      <span class="glyph">◈</span>
+      <h3><span data-lang="fr" class="visible">Vie privée par défaut</span><span data-lang="en">Private by default</span></h3>
+      <p><span data-lang="fr" class="visible">Pas de compte à créer. Vos données restent sur votre appareil.</span><span data-lang="en">No account to create. Your data stays on your device.</span></p>
+    </div>
+    <div class="principle">
+      <span class="glyph">✕</span>
+      <h3><span data-lang="fr" class="visible">Sans publicité</span><span data-lang="en">No ads</span></h3>
+      <p><span data-lang="fr" class="visible">Ni annonces, ni identifiant publicitaire, ni revente de données.</span><span data-lang="en">No ads, no advertising ID, no data resale.</span></p>
+    </div>
+    <div class="principle">
+      <span class="glyph">⌁</span>
+      <h3><span data-lang="fr" class="visible">Hors connexion d'abord</span><span data-lang="en">Offline first</span></h3>
+      <p><span data-lang="fr" class="visible">L'essentiel fonctionne sans réseau : en cuisine, en voiture, en mode avion.</span><span data-lang="en">The essentials work without a network: in the kitchen, in the car, in flight mode.</span></p>
+    </div>
+    <div class="principle">
+      <span class="glyph">☥</span>
+      <h3><span data-lang="fr" class="visible">Transparence</span><span data-lang="en">Transparency</span></h3>
+      <p><span data-lang="fr" class="visible">Le statut réel de chaque projet est affiché ici. L'usage de l'IA est signalé. Le code est ouvert quand c'est possible.</span><span data-lang="en">The real status of each project is shown here. AI use is disclosed. Code is open whenever possible.</span></p>
     </div>
   </div>
 </section>
@@ -614,8 +693,8 @@
 <section id="apps">
   <div style="text-align:center; margin-bottom: 64px;">
     <p class="section-label">
-      <span data-lang="fr" class="visible">Nos Applications</span>
-      <span data-lang="en">Our Apps</span>
+      <span data-lang="fr" class="visible">Nos créations</span>
+      <span data-lang="en">Our work</span>
     </p>
     <h2 class="section-title">
       <span data-lang="fr" class="visible">Le Panthéon</span>
@@ -627,7 +706,7 @@
 
     <!-- HapiCook -->
     <div class="app-card is-live">
-      <svg class="app-icon" viewBox="0 0 56 56" fill="none">
+      <svg class="app-icon" viewBox="0 0 56 56" fill="none" aria-hidden="true">
         <rect width="56" height="56" rx="14" fill="#13162a"/>
         <path d="M15 27 Q15 41 28 41 Q41 41 41 27 Z" stroke="#c9a84c" stroke-width="1.2" fill="none"/>
         <line x1="15" y1="27" x2="41" y2="27" stroke="#c9a84c" stroke-width="1.2"/>
@@ -642,17 +721,25 @@
         <span data-lang="en">Cooking · Recipes</span>
       </p>
       <h3 class="app-name">HapiCook</h3>
+      <p class="app-deity">
+        <span data-lang="fr" class="visible">Sous le signe de Hâpy, dieu de la crue et de l'abondance.</span>
+        <span data-lang="en">Under the sign of Hapi, god of the flood and of abundance.</span>
+      </p>
       <span class="app-badge badge-live">
         <span data-lang="fr" class="visible">Disponible</span>
         <span data-lang="en">Available</span>
       </span>
       <p class="app-desc">
-        <span data-lang="fr" class="visible">1 555 recettes végétariennes internationales guidées pas à pas, compatibles avec votre robot de cuisine (Monsieur Cuisine Connect+). Planificateur de menus, liste de courses intelligente et glossaire culinaire — sans compte à créer.</span>
-        <span data-lang="en">1,555 international vegetarian recipes with step-by-step guidance, compatible with your kitchen robot (Monsieur Cuisine Connect+). Meal planner, smart shopping list and culinary glossary — no account required.</span>
+        <span data-lang="fr" class="visible">2 644 recettes végétariennes du monde entier, chacune illustrée, avec Hapi l'hippopotame. Guidage pas à pas avec minuteurs et réglages robot, induction ou four ; quantités adaptées aux portions ; menu et liste de courses à partager ; filtres allergènes et produits de saison.</span>
+        <span data-lang="en">2,644 vegetarian recipes from around the world, each one illustrated, with Hapi the hippo. Step-by-step guidance with timers and settings for cooking robots, induction or oven; quantities scaled to servings; shareable menu and shopping list; allergen filters and seasonal produce.</span>
+      </p>
+      <p class="app-meta">
+        <span data-lang="fr" class="visible">Android · gratuit · sans compte · sans publicité</span>
+        <span data-lang="en">Android · free · no account · no ads</span>
       </p>
       <div class="store-links">
-        <a href="https://play.google.com/store/apps/details?id=com.ennead.hapicook" class="store-btn" target="_blank">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17c0-.83 1-.95 1.45-.5l14 8.5-14 8.5c-.45.45-1.45.33-1.45-.5z"/></svg>
+        <a href="https://play.google.com/store/apps/details?id=com.ennead.hapicook" class="store-btn" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 20.5v-17c0-.83 1-.95 1.45-.5l14 8.5-14 8.5c-.45.45-1.45.33-1.45-.5z"/></svg>
           Google Play
         </a>
       </div>
@@ -660,7 +747,7 @@
 
     <!-- Tot & Batet -->
     <div class="app-card">
-      <svg class="app-icon" viewBox="0 0 56 56" fill="none">
+      <svg class="app-icon" viewBox="0 0 56 56" fill="none" aria-hidden="true">
         <rect width="56" height="56" rx="14" fill="#13162a"/>
         <circle cx="28" cy="22" r="10" stroke="#c9a84c" stroke-width="1.2"/>
         <path d="M20 34 Q28 44 36 34" stroke="#c9a84c" stroke-width="1.2" fill="none"/>
@@ -672,19 +759,30 @@
         <span data-lang="en">Audio · Kids</span>
       </p>
       <h3 class="app-name">Tot &amp; Batet</h3>
-      <span class="app-badge badge-soon">
-        <span data-lang="fr" class="visible">Bientôt</span>
-        <span data-lang="en">Coming soon</span>
+      <p class="app-deity">
+        <span data-lang="fr" class="visible">Sous le signe de Thot, qui raconte, et de Bastet, qui protège le foyer.</span>
+        <span data-lang="en">Under the sign of Thoth, the storyteller, and Bastet, guardian of the home.</span>
+      </p>
+      <span class="app-badge badge-pause">
+        <span data-lang="fr" class="visible">Prototype · En pause</span>
+        <span data-lang="en">Prototype · On hold</span>
       </span>
       <p class="app-desc">
-        <span data-lang="fr" class="visible">Le lecteur d'histoires interactives qui fait rêver les enfants et rassure les parents. Smartphone transformé en boîte à histoires sécurisée, avec contrôle parental complet.</span>
-        <span data-lang="en">The interactive story player that sparks children's imagination and reassures parents. Your smartphone becomes a safe story box, with full parental control.</span>
+        <span data-lang="fr" class="visible">Le smartphone devient une boîte à histoires sécurisée : écran éteint pendant l'écoute, navigation par les boutons de volume, sortie protégée par un code parental. Un prototype Android fonctionne ; le développement est en pause.</span>
+        <span data-lang="en">Your smartphone becomes a safe story box: screen off while listening, navigation with the volume buttons, exit protected by a parental code. A working Android prototype exists; development is on hold.</span>
       </p>
+      <p class="app-meta">
+        <span data-lang="fr" class="visible">Android · 3-10 ans · non distribuée</span>
+        <span data-lang="en">Android · ages 3-10 · not distributed</span>
+      </p>
+      <div class="store-links">
+        <a href="https://www.totetbatet.com" class="store-btn" target="_blank" rel="noopener">totetbatet.com</a>
+      </div>
     </div>
 
     <!-- Horus & Ptah -->
     <div class="app-card">
-      <svg class="app-icon" viewBox="0 0 56 56" fill="none">
+      <svg class="app-icon" viewBox="0 0 56 56" fill="none" aria-hidden="true">
         <rect width="56" height="56" rx="14" fill="#13162a"/>
         <circle cx="28" cy="28" r="14" stroke="#c9a84c" stroke-width="1" opacity="0.4"/>
         <circle cx="28" cy="28" r="8" stroke="#c9a84c" stroke-width="1.2"/>
@@ -695,95 +793,148 @@
         <line x1="36" y1="28" x2="46" y2="28" stroke="#c9a84c" stroke-width="1" opacity="0.5"/>
       </svg>
       <p class="app-category">
-        <span data-lang="fr" class="visible">Développement personnel · Bien-être</span>
-        <span data-lang="en">Personal growth · Wellbeing</span>
+        <span data-lang="fr" class="visible">Bien-être · Self-care</span>
+        <span data-lang="en">Wellbeing · Self-care</span>
       </p>
       <h3 class="app-name">Horus &amp; Ptah</h3>
+      <p class="app-deity">
+        <span data-lang="fr" class="visible">Sous le signe d'Horus, qui voit clair, et de Ptah, qui façonne.</span>
+        <span data-lang="en">Under the sign of Horus, who sees clearly, and Ptah, who shapes.</span>
+      </p>
       <span class="app-badge badge-soon">
-        <span data-lang="fr" class="visible">Bientôt</span>
-        <span data-lang="en">Coming soon</span>
+        <span data-lang="fr" class="visible">En exploration</span>
+        <span data-lang="en">Exploring</span>
       </span>
       <p class="app-desc">
-        <span data-lang="fr" class="visible">Une application de développement personnel et de self-care, inspirée par la vision perçante d'Horus et le pouvoir créateur de Ptah. En cours de développement.</span>
-        <span data-lang="en">A personal development and self-care app, inspired by the sharp vision of Horus and the creative power of Ptah. Currently in development.</span>
+        <span data-lang="fr" class="visible">Un compagnon de self-care pour mieux se comprendre et changer ses habitudes. Phase de recherche : outils issus des thérapies brèves et cognitives, échelles de bien-être validées, premières maquettes.</span>
+        <span data-lang="en">A self-care companion to understand yourself better and change your habits. Research phase: tools drawn from brief and cognitive therapies, validated wellbeing scales, first mock-ups.</span>
+      </p>
+      <p class="app-meta">
+        <span data-lang="fr" class="visible">Pas de date de sortie</span>
+        <span data-lang="en">No release date yet</span>
       </p>
     </div>
 
+    <!-- md2nativedocx -->
+    <div class="app-card is-live">
+      <svg class="app-icon" viewBox="0 0 56 56" fill="none" aria-hidden="true">
+        <rect width="56" height="56" rx="14" fill="#13162a"/>
+        <rect x="17" y="12" width="22" height="30" rx="2" stroke="#c9a84c" stroke-width="1.2"/>
+        <line x1="21" y1="19" x2="35" y2="19" stroke="#c9a84c" stroke-width="1"/>
+        <line x1="21" y1="24" x2="31" y2="24" stroke="#c9a84c" stroke-width="1" opacity="0.6"/>
+        <rect x="21" y="29" width="5" height="5" stroke="#c9a84c" stroke-width="0.9"/>
+        <rect x="30" y="33" width="5" height="5" stroke="#c9a84c" stroke-width="0.9"/>
+        <line x1="26" y1="31.5" x2="30" y2="35.5" stroke="#c9a84c" stroke-width="0.8"/>
+      </svg>
+      <p class="app-category">
+        <span data-lang="fr" class="visible">Outil · Open source</span>
+        <span data-lang="en">Tool · Open source</span>
+      </p>
+      <h3 class="app-name">md2nativedocx</h3>
+      <p class="app-deity">
+        <span data-lang="fr" class="visible">Sous le signe de Seshat, déesse de l'écriture et des mesures.</span>
+        <span data-lang="en">Under the sign of Seshat, goddess of writing and measurement.</span>
+      </p>
+      <span class="app-badge badge-live">
+        <span data-lang="fr" class="visible">Disponible</span>
+        <span data-lang="en">Available</span>
+      </span>
+      <p class="app-desc">
+        <span data-lang="fr" class="visible">Transforme un document Markdown en vrai fichier Word : titres, tableaux, notes, équations, modèle d'entreprise… et des diagrammes Mermaid qui restent modifiables dans Word, boîte par boîte.</span>
+        <span data-lang="en">Turns a Markdown document into a proper Word file: headings, tables, footnotes, equations, your company template… and Mermaid diagrams that stay editable in Word, box by box.</span>
+      </p>
+      <p class="app-meta">
+        <span data-lang="fr" class="visible">Extension VS Code · ligne de commande · licence CC0</span>
+        <span data-lang="en">VS Code extension · command line · CC0 licence</span>
+      </p>
+      <div class="store-links">
+        <a href="https://marketplace.visualstudio.com/items?itemName=md2nativedocx.md2nativedocx" class="store-btn" target="_blank" rel="noopener">VS Code</a>
+        <a href="https://github.com/nicolasbridelance/md2nativedocx" class="store-btn" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+
   </div>
+
+  <p class="legend">
+    <span data-lang="fr" class="visible"><span>● Disponible : utilisable aujourd'hui</span><span>● Prototype : fonctionne, non distribué</span><span>● Exploration : recherche et maquettes</span></span>
+    <span data-lang="en"><span>● Available: usable today</span><span>● Prototype: works, not distributed</span><span>● Exploring: research and mock-ups</span></span>
+  </p>
 </section>
 
 <!-- PRIVACY -->
 <section id="privacy">
   <div style="text-align:center; margin-bottom: 48px;">
     <p class="section-label">
-      <span data-lang="fr" class="visible">Données & Vie privée</span>
-      <span data-lang="en">Data & Privacy</span>
+      <span data-lang="fr" class="visible">Données &amp; vie privée</span>
+      <span data-lang="en">Data &amp; privacy</span>
     </p>
     <h2 class="section-title">
-      <span data-lang="fr" class="visible">Politique de Confidentialité</span>
-      <span data-lang="en">Privacy Policy</span>
+      <span data-lang="fr" class="visible">Politique de confidentialité</span>
+      <span data-lang="en">Privacy policy</span>
     </h2>
   </div>
 
   <div class="privacy-block">
     <div data-lang="fr" class="visible">
-      <h3>Principe fondamental</h3>
-      <p>Ennead Studio collecte le strict minimum. Notre philosophie : les meilleures données sont celles que nous ne stockons pas.</p>
+      <h3>Principe</h3>
+      <p>Ennead Studio collecte le strict minimum. Les meilleures données sont celles que nous ne stockons pas.</p>
 
-      <h3>Données collectées</h3>
-      <p>Nos applications <strong>ne collectent aucune donnée personnelle identifiable</strong>. Nous n'accédons pas à votre nom, email, localisation ou contacts.</p>
-      <p>L'authentification, lorsqu'elle est nécessaire, est déléguée à Google ou Apple via OAuth2. Nous ne stockons qu'un identifiant opaque anonyme — jamais votre adresse email ou vos informations personnelles.</p>
+      <h3>HapiCook</h3>
+      <h4>Données sur votre appareil</h4>
+      <p>Vos favoris, notes de cuisine, menu, liste de courses et préférences sont enregistrés <strong>uniquement sur votre appareil</strong>, dans une base de données locale. Ils ne sont jamais envoyés à nos serveurs. Aucun compte n'est nécessaire.</p>
+      <h4>Images</h4>
+      <p>Les images des recettes sont téléchargées depuis nos serveurs à la demande, puis gardées en cache. Ces requêtes ne transmettent aucune donnée personnelle ; comme pour tout site web, le serveur reçoit des informations techniques de connexion (adresse IP), utilisées pour son fonctionnement et sa sécurité.</p>
+      <h4>Publicité</h4>
+      <p>Depuis la version 0.2.1, HapiCook ne contient <strong>aucune publicité</strong> et n'utilise aucun identifiant publicitaire. Les versions antérieures affichaient des annonces Google AdMob : mettez l'application à jour pour en profiter. Aucune donnée n'est vendue ni partagée avec des tiers.</p>
 
-      <h3>Applications jeunesse (Tot & Batet)</h3>
-      <p>Tot & Batet est conçue pour les enfants. Elle ne contient <strong>aucune publicité</strong>, ne collecte aucune donnée, et respecte strictement le RGPD et les réglementations relatives aux mineurs (COPPA).</p>
+      <h3>Tot &amp; Batet</h3>
+      <p>Prototype non distribué au public. Principes retenus : aucune publicité, aucune collecte de données sur l'enfant, respect du RGPD et des règles applicables aux mineurs. Une politique dédiée sera publiée avant toute distribution.</p>
 
-      <h3>Publicité</h3>
-      <p>HapiCook ne contient aucune publicité. Nos applications jeunesse n'en contiennent jamais.</p>
+      <h3>md2nativedocx</h3>
+      <p>Outil exécuté sur votre ordinateur : vos documents ne sont pas envoyés à Ennead Studio.</p>
 
-      <h3>HapiCook — Données locales</h3>
-      <p>HapiCook stocke vos favoris, notes de cuisine, liste de courses et planificateur de menus <strong>uniquement sur votre appareil</strong>, dans une base de données locale (SQLite). Ces données ne sont jamais transmises à nos serveurs.</p>
-      <p>Les images de recettes peuvent être chargées depuis nos serveurs à la demande. Aucune donnée personnelle n'est transmise lors de ces requêtes.</p>
-      <p>HapiCook ne contient <strong>aucune publicité</strong> et n'utilise aucun identifiant publicitaire. Aucune donnée n'est partagée avec des tiers.</p>
+      <h3>Ce site</h3>
+      <p>Hébergé par GitHub Pages. Aucun cookie, aucune mesure d'audience. Les polices sont fournies par Google Fonts.</p>
 
       <h3>Vos droits</h3>
-      <p>Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression. Contactez-nous à <a href="mailto:ennead.studio@gmail.com" style="color:var(--gold)">ennead.studio@gmail.com</a>.</p>
+      <p>Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et d'effacement. Écrivez-nous à <a href="mailto:ennead.studio@gmail.com" style="color:var(--gold)">ennead.studio@gmail.com</a>.</p>
 
-      <h3>Contact</h3>
-      <p>Ennead Studio — Paris, France<br>
-      Responsable : Nicolas Bridelance<br>
+      <h3>Responsable</h3>
+      <p>Ennead Studio — Nicolas Bridelance, Paris, France<br>
       <a href="mailto:ennead.studio@gmail.com" style="color:var(--gold)">ennead.studio@gmail.com</a></p>
 
-      <p style="margin-top:24px; font-size:14px; opacity:0.5;">Dernière mise à jour : novembre 2026</p>
+      <p style="margin-top:24px; font-size:14px; opacity:0.5;">Dernière mise à jour : 10 novembre 2026</p>
     </div>
 
     <div data-lang="en">
-      <h3>Core principle</h3>
-      <p>Ennead Studio collects the strict minimum. Our philosophy: the best data is the data we don't store.</p>
+      <h3>Principle</h3>
+      <p>Ennead Studio collects the strict minimum. The best data is the data we don't store.</p>
 
-      <h3>Data collected</h3>
-      <p>Our apps <strong>collect no personally identifiable information</strong>. We do not access your name, email, location, or contacts.</p>
-      <p>When authentication is required, it is delegated to Google or Apple via OAuth2. We only store an anonymous opaque identifier — never your email address or personal information.</p>
+      <h3>HapiCook</h3>
+      <h4>Data on your device</h4>
+      <p>Your favourites, cooking notes, menu, shopping list and preferences are stored <strong>only on your device</strong>, in a local database. They are never sent to our servers. No account is needed.</p>
+      <h4>Images</h4>
+      <p>Recipe images are downloaded from our servers on demand, then cached. These requests carry no personal data; as with any website, the server receives technical connection information (IP address), used for its operation and security.</p>
+      <h4>Advertising</h4>
+      <p>Since version 0.2.1, HapiCook contains <strong>no advertising</strong> and uses no advertising identifier. Earlier versions showed Google AdMob ads: update the app to get the ad-free version. No data is sold or shared with third parties.</p>
 
-      <h3>Children's apps (Tot & Batet)</h3>
-      <p>Tot & Batet is designed for children. It contains <strong>no advertising</strong>, collects no data, and strictly complies with GDPR and children's regulations (COPPA).</p>
+      <h3>Tot &amp; Batet</h3>
+      <p>A prototype, not distributed to the public. Principles: no advertising, no data collected about the child, compliance with GDPR and rules for minors. A dedicated policy will be published before any release.</p>
 
-      <h3>Advertising</h3>
-      <p>HapiCook contains no advertising. Our children's applications never do.</p>
+      <h3>md2nativedocx</h3>
+      <p>A tool that runs on your computer: your documents are not sent to Ennead Studio.</p>
 
-      <h3>HapiCook — Local data</h3>
-      <p>HapiCook stores your favorites, cooking notes, shopping list and meal planner <strong>only on your device</strong>, in a local database (SQLite). This data is never transmitted to our servers.</p>
-      <p>Recipe images may be loaded from our servers on demand. No personal data is transmitted during these requests.</p>
-      <p>HapiCook contains <strong>no advertising</strong> and uses no advertising identifier. No data is shared with third parties.</p>
+      <h3>This website</h3>
+      <p>Hosted by GitHub Pages. No cookies, no analytics. Fonts are served by Google Fonts.</p>
 
       <h3>Your rights</h3>
-      <p>Under GDPR, you have the right to access, correct, and delete your data. Contact us at <a href="mailto:ennead.studio@gmail.com" style="color:var(--gold)">ennead.studio@gmail.com</a>.</p>
+      <p>Under GDPR, you have the right to access, correct and delete your data. Write to <a href="mailto:ennead.studio@gmail.com" style="color:var(--gold)">ennead.studio@gmail.com</a>.</p>
 
-      <h3>Contact</h3>
-      <p>Ennead Studio — Paris, France<br>
-      Developer: Nicolas Bridelance<br>
+      <h3>Controller</h3>
+      <p>Ennead Studio — Nicolas Bridelance, Paris, France<br>
       <a href="mailto:ennead.studio@gmail.com" style="color:var(--gold)">ennead.studio@gmail.com</a></p>
 
-      <p style="margin-top:24px; font-size:14px; opacity:0.5;">Last updated: November 2026</p>
+      <p style="margin-top:24px; font-size:14px; opacity:0.5;">Last updated: 10 November 2026</p>
     </div>
   </div>
 </section>
@@ -796,12 +947,12 @@
       <span data-lang="fr" class="visible">Une question ?<br>Un projet ?</span>
       <span data-lang="en">A question?<br>A project?</span>
     </h2>
-    <p style="color:var(--muted); max-width:420px; margin: 0 auto;">
-      <span data-lang="fr" class="visible">Partenariats éditeurs, presse, retours utilisateurs — toutes les demandes sont les bienvenues.</span>
-      <span data-lang="en">Publisher partnerships, press, user feedback — all inquiries are welcome.</span>
+    <p style="color:var(--muted); max-width:460px; margin: 0 auto;">
+      <span data-lang="fr" class="visible">Retours sur une application, partenariats éditoriaux, presse : toutes les demandes sont les bienvenues.</span>
+      <span data-lang="en">App feedback, publishing partnerships, press: all enquiries are welcome.</span>
     </p>
     <a href="mailto:ennead.studio@gmail.com" class="contact-email">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
       ennead.studio@gmail.com
     </a>
   </div>
@@ -809,16 +960,20 @@
 
 <footer>
   <span class="footer-logo">Ennead Studio</span>
-  <span class="footer-copy">
-    <span data-lang="fr" class="visible">© 2026 Ennead Studio · Paris, France</span>
-    <span data-lang="en">© 2026 Ennead Studio · Paris, France</span>
+  <span class="footer-links">
+    <a href="https://play.google.com/store/apps/details?id=com.ennead.hapicook" target="_blank" rel="noopener">HapiCook</a>
+    <a href="https://www.totetbatet.com" target="_blank" rel="noopener">Tot &amp; Batet</a>
+    <a href="https://github.com/nicolasbridelance/md2nativedocx" target="_blank" rel="noopener">md2nativedocx</a>
+    <a href="https://github.com/Ennead-Studio" target="_blank" rel="noopener">GitHub</a>
   </span>
+  <span class="footer-copy">© 2026 Ennead Studio · Paris, France</span>
 </footer>
 
 <script>
   // STARFIELD
   const canvas = document.getElementById('stars');
   const ctx = canvas.getContext('2d');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let stars = [];
 
   function resize() {
@@ -849,13 +1004,13 @@
       ctx.fillStyle = `rgba(201,168,76,${o})`;
       ctx.fill();
     });
-    requestAnimationFrame(ts => drawStars(ts / 1000));
+    if (!reduce) requestAnimationFrame(ts => drawStars(ts / 1000));
   }
 
   resize();
   initStars();
   drawStars(0);
-  window.addEventListener('resize', () => { resize(); initStars(); });
+  window.addEventListener('resize', () => { resize(); initStars(); drawStars(0); });
 
   // LANG
   function setLang(lang) {
@@ -867,9 +1022,7 @@
     document.documentElement.lang = lang;
   }
 
-  // Detect browser language
-  const browserLang = navigator.language.startsWith('fr') ? 'fr' : 'en';
-  setLang(browserLang);
+  setLang(navigator.language.startsWith('fr') ? 'fr' : 'en');
 </script>
 
 </body>
